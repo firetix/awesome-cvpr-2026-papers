@@ -1,0 +1,15 @@
+{
+  "paper_count": 4069,
+  "arxiv_count": 2671,
+  "poster_count": 3929,
+  "code_or_resource_count": 952,
+  "github_repo_count": 685,
+  "paperdigest_code_entries_matched_or_available": 978,
+  "generated_from": {
+    "cvf_openaccess": "https://openaccess.thecvf.com/CVPR2026?day=all",
+    "cvpr_virtual": "https://cvpr.thecvf.com/virtual/2026/papers.html",
+    "paperdigest_code": "https://www.paperdigest.org/2026/06/cvpr-2026-papers-with-code-data/",
+    "amusi": "https://github.com/amusi/CVPR2026-Papers-with-Code",
+    "skalski": "https://github.com/SkalskiP/top-cvpr-2026-papers"
+  }
+}
