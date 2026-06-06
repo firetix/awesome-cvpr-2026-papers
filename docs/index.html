@@ -155,7 +155,7 @@
 
     .filters {
       display: grid;
-      grid-template-columns: 2fr 1fr 1fr 0.85fr;
+      grid-template-columns: 2fr 1fr 1fr 0.85fr 0.95fr;
       gap: 12px;
       align-items: end;
     }
@@ -268,6 +268,8 @@
     }
 
     .chip.code { color: #bbf7d0; border-color: rgba(52, 211, 153, 0.36); }
+    .chip.github { color: #bfdbfe; border-color: rgba(96, 165, 250, 0.42); text-decoration: none; }
+    .chip.github:hover { border-color: rgba(114, 224, 255, 0.72); background: rgba(30, 64, 175, 0.28); }
     .chip.no-code { color: #fecdd3; border-color: rgba(251, 113, 133, 0.34); }
 
     .rationale {
@@ -393,6 +395,10 @@
           <label>Implementation</label>
           <span class="toggle"><input id="codeOnly" type="checkbox" /> Code only</span>
         </div>
+        <div>
+          <label>Repository</label>
+          <span class="toggle"><input id="githubOnly" type="checkbox" /> GitHub repo only</span>
+        </div>
       </div>
       <div class="toolbar">
         <span id="resultSummary">Loading papers…</span>
@@ -453,7 +459,7 @@
       const links = [];
       if (has(paper.paper_url)) links.push(`<a href="${safe(paper.paper_url)}" target="_blank" rel="noopener">CVF/Paper</a>`);
       if (has(paper.arxiv_url)) links.push(`<a href="${safe(paper.arxiv_url)}" target="_blank" rel="noopener">arXiv</a>`);
-      if (has(paper.github_url)) links.push(`<a href="${safe(paper.github_url)}" target="_blank" rel="noopener">GitHub</a>`);
+      if (has(paper.github_url)) links.push(`<a href="${safe(paper.github_url)}" target="_blank" rel="noopener" aria-label="Open GitHub repository for ${safe(paper.title)}">GitHub Repo</a>`);
       if (has(paper.project_url)) links.push(`<a href="${safe(paper.project_url)}" target="_blank" rel="noopener">Project</a>`);
       if (has(paper.code_url) && paper.code_url !== paper.github_url && paper.code_url !== paper.project_url) {
         links.push(`<a href="${safe(paper.code_url)}" target="_blank" rel="noopener">Code/Resource</a>`);
@@ -482,6 +488,7 @@
             <span class="chip">${safe(paper.novelty_angle || 'Unspecified novelty')}</span>
             <span class="chip">${safe(paper.improvement_axis || 'Unspecified improvement')}</span>
             <span class="chip ${paper.has_code ? 'code' : 'no-code'}">${paper.has_code ? 'Code available' : 'No code found'}</span>
+            ${has(paper.github_url) ? `<a class="chip github" href="${safe(paper.github_url)}" target="_blank" rel="noopener" aria-label="Open GitHub repository for ${safe(paper.title)}">GitHub repo</a>` : ''}
           </div>
           ${has(paper.improvement_rationale) ? `<p class="rationale">${safe(paper.improvement_rationale)}</p>` : ''}
           <div class="card-links">${paperLinks(paper)}</div>
@@ -494,11 +501,13 @@
       const area = el('areaSelect').value;
       const novelty = el('noveltySelect').value;
       const codeOnly = el('codeOnly').checked;
+      const githubOnly = el('githubOnly').checked;
 
       state.filtered = state.all.filter((paper) => {
         if (area && paper.primary_area !== area) return false;
         if (novelty && paper.novelty_angle !== novelty) return false;
         if (codeOnly && !paper.has_code) return false;
+        if (githubOnly && !has(paper.github_url)) return false;
         if (!query) return true;
         const haystack = [paper.title, paper.authors, paper.primary_area, paper.secondary_area, paper.novelty_angle, paper.improvement_axis, paper.improvement_rationale, paper.github_url, paper.project_url, paper.arxiv_url].join(' ').toLowerCase();
         return haystack.includes(query);
@@ -532,7 +541,7 @@
       }
     }
 
-    ['searchInput', 'areaSelect', 'noveltySelect', 'codeOnly'].forEach((id) => {
+    ['searchInput', 'areaSelect', 'noveltySelect', 'codeOnly', 'githubOnly'].forEach((id) => {
       el(id).addEventListener('input', applyFilters);
       el(id).addEventListener('change', applyFilters);
     });
@@ -542,6 +551,7 @@
       el('areaSelect').value = '';
       el('noveltySelect').value = '';
       el('codeOnly').checked = false;
+      el('githubOnly').checked = false;
       applyFilters();
     });
 
