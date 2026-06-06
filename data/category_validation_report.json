@@ -1,0 +1,230 @@
+{
+  "paper_count": 4069,
+  "abstracts_present": 4069,
+  "primary_area_count": 14,
+  "empty_primary_area": 0,
+  "empty_novelty_angle": 0,
+  "empty_improvement_rationale": 0,
+  "top_primary_areas": [
+    [
+      "Generative Models, Editing & Creative Vision",
+      750
+    ],
+    [
+      "3D Vision, Geometry & Neural Rendering",
+      748
+    ],
+    [
+      "Learning, Optimization & Efficient Foundation Models",
+      457
+    ],
+    [
+      "Video, Motion & Temporal Understanding",
+      417
+    ],
+    [
+      "Vision-Language & Multimodal Intelligence",
+      352
+    ],
+    [
+      "Recognition, Detection & Segmentation",
+      341
+    ],
+    [
+      "Datasets, Benchmarks & Evaluation",
+      250
+    ],
+    [
+      "Embodied AI, Robotics & Autonomous Driving",
+      220
+    ],
+    [
+      "Safety, Robustness, Privacy & Trustworthy CV",
+      201
+    ],
+    [
+      "Human-Centric Vision, Biometrics & Behavior",
+      138
+    ],
+    [
+      "Medical, Scientific, Remote-Sensing & Domain Vision",
+      84
+    ],
+    [
+      "Low-Level Vision & Computational Photography",
+      79
+    ],
+    [
+      "Document, OCR & Visual Information Extraction",
+      30
+    ],
+    [
+      "General Computer Vision",
+      2
+    ]
+  ],
+  "top_novelty_angles": [
+    [
+      "Multimodal Fusion / Grounding",
+      823
+    ],
+    [
+      "Geometry or Physical Prior",
+      753
+    ],
+    [
+      "Application or System Integration",
+      496
+    ],
+    [
+      "Efficiency / Acceleration / Compression",
+      361
+    ],
+    [
+      "Model Architecture",
+      314
+    ],
+    [
+      "New Representation",
+      267
+    ],
+    [
+      "Data, Dataset or Synthetic-Data Engine",
+      266
+    ],
+    [
+      "Editing, Control or Compositionality",
+      211
+    ],
+    [
+      "Reasoning, Planning or Agentic Control",
+      197
+    ],
+    [
+      "Training / Pretraining Objective",
+      134
+    ],
+    [
+      "Robustness, Safety or Privacy Method",
+      132
+    ],
+    [
+      "Evaluation, Benchmark or Metric",
+      96
+    ],
+    [
+      "Theoretical or Analytical Insight",
+      19
+    ]
+  ],
+  "sample_records": [
+    {
+      "title": "Generalizable Structure-Aware Keypoint Correspondence for Category-Unified 3D Single Object Tracking",
+      "primary_area": "3D Vision, Geometry & Neural Rendering",
+      "secondary_area": "Video, Motion & Temporal Understanding",
+      "novelty_angle": "Geometry or Physical Prior",
+      "improvement_axis": "Generalization / Robustness",
+      "improvement_rationale": "Targets generalization / robustness in 3d vision, geometry & neural rendering by using geometry or physical prior. Evidence: UniKPT comprises three key modules: (1) an adaptive keypoint extractor that produces scale-aware and semantically meaningful keypoints; (2) a progressive correspondence aligner that establishes robust cross-frame geometric associations; and (3) a confidence-aware structural localization module that suppresses…",
+      "github": ""
+    },
+    {
+      "title": "DirectFisheye-GS: Enabling Native Fisheye Input in Gaussian Splatting with Cross-View Joint Optimization",
+      "primary_area": "3D Vision, Geometry & Neural Rendering",
+      "secondary_area": "Learning, Optimization & Efficient Foundation Models",
+      "novelty_angle": "Geometry or Physical Prior",
+      "improvement_axis": "3D / Physical Consistency",
+      "improvement_rationale": "Targets 3d / physical consistency in 3d vision, geometry & neural rendering by using geometry or physical prior. Evidence: 3D Gaussian Splatting (3DGS) has enabled efficient 3D scene reconstruction from everyday images with real-time, high-fidelity rendering, greatly advancing VR/AR applications.",
+      "github": ""
+    },
+    {
+      "title": "CompBench: Benchmarking Complex Instruction-guided Image Editing",
+      "primary_area": "Generative Models, Editing & Creative Vision",
+      "secondary_area": "Vision-Language & Multimodal Intelligence",
+      "novelty_angle": "Editing, Control or Compositionality",
+      "improvement_axis": "Controllability / Editability",
+      "improvement_rationale": "Targets controllability / editability in generative models, editing & creative vision by using editing, control or compositionality. Evidence: While real-world applications increasingly demand intricate scene manipulation, existing instruction-guided image editing benchmarks often oversimplify task complexity and lack comprehensive, fine-grained instructions.",
+      "github": ""
+    },
+    {
+      "title": "Choreographing a World of Dynamic Objects",
+      "primary_area": "3D Vision, Geometry & Neural Rendering",
+      "secondary_area": "Video, Motion & Temporal Understanding",
+      "novelty_angle": "Application or System Integration",
+      "improvement_axis": "Scalability",
+      "improvement_rationale": "Targets scalability in 3d vision, geometry & neural rendering by using application or system integration. Evidence: Traditional rule-based graphics pipelines to create these dynamics are based on category-specific heuristics, yet are labor-intensive and not scalable.",
+      "github": ""
+    },
+    {
+      "title": "Spk2VidNet: A Hierarchical Recurrent Architecture for High-Fidelity Video Reconstruction from Long Spike-Camera Streams",
+      "primary_area": "Video, Motion & Temporal Understanding",
+      "secondary_area": "Low-Level Vision & Computational Photography",
+      "novelty_angle": "Model Architecture",
+      "improvement_axis": "Temporal Consistency",
+      "improvement_rationale": "Targets temporal consistency in video, motion & temporal understanding by using model architecture. Evidence: In addition, we develop a fusion module to adaptively integrate neighboring aligned features based on multi-scale similarity for robust feature aggregation.",
+      "github": ""
+    },
+    {
+      "title": "Continual Distillation of Teachers from Different Domains",
+      "primary_area": "Learning, Optimization & Efficient Foundation Models",
+      "secondary_area": "",
+      "novelty_angle": "Training / Pretraining Objective",
+      "improvement_axis": "Scalability",
+      "improvement_rationale": "Targets scalability in learning, optimization & efficient foundation models by using training / pretraining objective. Evidence: Experiments on multiple benchmarks show that SE2D reduces UKF and improves cross-domain generalization.",
+      "github": "https://github.com/Nicolas1203/continual_distillation"
+    },
+    {
+      "title": "GT-SVJ: Generative-Transformer-Based Self-Supervised Video Judge For Efficient Video Reward Modeling",
+      "primary_area": "Video, Motion & Temporal Understanding",
+      "secondary_area": "Learning, Optimization & Efficient Foundation Models",
+      "novelty_angle": "Training / Pretraining Objective",
+      "improvement_axis": "Temporal Consistency",
+      "improvement_rationale": "Targets temporal consistency in video, motion & temporal understanding by using training / pretraining objective. Evidence: We present the Generative-Transformer-based Self-Supervised Video Judge (\\modelname), a novel evaluation model that transforms state-of-the-art video generation models into powerful temporally-aware reward models.",
+      "github": ""
+    },
+    {
+      "title": "Beyond Euclidean Gossip: KL-Barycentric Consensus on Heterogeneous and Imbalanced Images",
+      "primary_area": "Datasets, Benchmarks & Evaluation",
+      "secondary_area": "Learning, Optimization & Efficient Foundation Models",
+      "novelty_angle": "Data, Dataset or Synthetic-Data Engine",
+      "improvement_axis": "3D / Physical Consistency",
+      "improvement_rationale": "Targets 3d / physical consistency in datasets, benchmarks & evaluation by using data, dataset or synthetic-data engine. Evidence: Fully decentralized deep learning removes global servers and ensures local data privacy.",
+      "github": "https://github.com/x-lu/Beyond-euclidean-gossip"
+    },
+    {
+      "title": "HybridDriveVLA: Vision-Language-Action Model with Visual CoT reasoning and ToT Evaluation for Autonomous Driving",
+      "primary_area": "Embodied AI, Robotics & Autonomous Driving",
+      "secondary_area": "Datasets, Benchmarks & Evaluation",
+      "novelty_angle": "Multimodal Fusion / Grounding",
+      "improvement_axis": "Evaluation Clarity",
+      "improvement_rationale": "Targets evaluation clarity in embodied ai, robotics & autonomous driving by using multimodal fusion / grounding. Evidence: Vision-Language-Action (VLA) models are emerging as an important technology in autonomous driving, recognized for their sophisticated reasoning and interpretability.",
+      "github": ""
+    },
+    {
+      "title": "Training-free, Perceptually Consistent Low-Resolution Previews with High-Resolution Image for Efficient Workflows of Diffusion Models",
+      "primary_area": "Learning, Optimization & Efficient Foundation Models",
+      "secondary_area": "Generative Models, Editing & Creative Vision",
+      "novelty_angle": "Efficiency / Acceleration / Compression",
+      "improvement_axis": "Efficiency / Speed",
+      "improvement_rationale": "Targets efficiency / speed in learning, optimization & efficient foundation models by using efficiency / acceleration / compression. Evidence: Here, we consider the task of generating high-fidelity LR images, called Previews, that preserve perceptual similarity of their HR counterparts for an efficient workflow, allowing users to identify promising candidates before generating the final HR image.",
+      "github": ""
+    },
+    {
+      "title": "Catalyst4D: High-Fidelity 3D-to-4D Scene Editing via Dynamic Propagation",
+      "primary_area": "3D Vision, Geometry & Neural Rendering",
+      "secondary_area": "Video, Motion & Temporal Understanding",
+      "novelty_angle": "Editing, Control or Compositionality",
+      "improvement_axis": "Temporal Consistency",
+      "improvement_rationale": "Targets temporal consistency in 3d vision, geometry & neural rendering by using editing, control or compositionality. Evidence: Recent advances in 3D scene editing using NeRF and 3DGS enable high-quality static scene editing.",
+      "github": ""
+    },
+    {
+      "title": "Cloning Deterministic Worlds: The Critical Role of Latent Geometry in Long-Horizon World Models",
+      "primary_area": "Embodied AI, Robotics & Autonomous Driving",
+      "secondary_area": "3D Vision, Geometry & Neural Rendering",
+      "novelty_angle": "New Representation",
+      "improvement_axis": "3D / Physical Consistency",
+      "improvement_rationale": "Targets 3d / physical consistency in embodied ai, robotics & autonomous driving by using new representation. Evidence: 1) Through diagnostic experiment, we quantitatively demonstrate that high-fidelity cloning is feasible and the primary bottleneck for long-horizon fidelity is the geometric structure of the latent representation, not the dynamics model itself.",
+      "github": "https://github.com/XiaFire/Clone_Deterministic_Environment"
+    }
+  ]
+}

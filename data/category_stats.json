@@ -1,0 +1,120 @@
+{
+  "paper_count": 4069,
+  "abstract_count": 4069,
+  "areas": {
+    "Generative Models, Editing & Creative Vision": 750,
+    "3D Vision, Geometry & Neural Rendering": 748,
+    "Learning, Optimization & Efficient Foundation Models": 457,
+    "Video, Motion & Temporal Understanding": 417,
+    "Vision-Language & Multimodal Intelligence": 352,
+    "Recognition, Detection & Segmentation": 341,
+    "Datasets, Benchmarks & Evaluation": 250,
+    "Embodied AI, Robotics & Autonomous Driving": 220,
+    "Safety, Robustness, Privacy & Trustworthy CV": 201,
+    "Human-Centric Vision, Biometrics & Behavior": 138,
+    "Medical, Scientific, Remote-Sensing & Domain Vision": 84,
+    "Low-Level Vision & Computational Photography": 79,
+    "Document, OCR & Visual Information Extraction": 30,
+    "General Computer Vision": 2
+  },
+  "novelty_angles": {
+    "Multimodal Fusion / Grounding": 823,
+    "Geometry or Physical Prior": 753,
+    "Application or System Integration": 496,
+    "Efficiency / Acceleration / Compression": 361,
+    "Model Architecture": 314,
+    "New Representation": 267,
+    "Data, Dataset or Synthetic-Data Engine": 266,
+    "Editing, Control or Compositionality": 211,
+    "Reasoning, Planning or Agentic Control": 197,
+    "Training / Pretraining Objective": 134,
+    "Robustness, Safety or Privacy Method": 132,
+    "Evaluation, Benchmark or Metric": 96,
+    "Theoretical or Analytical Insight": 19
+  },
+  "improvement_axes": {
+    "Accuracy / Quality": 1147,
+    "3D / Physical Consistency": 932,
+    "Temporal Consistency": 554,
+    "Generalization / Robustness": 445,
+    "Efficiency / Speed": 290,
+    "Scalability": 195,
+    "Controllability / Editability": 186,
+    "Evaluation Clarity": 144,
+    "Safety / Trustworthiness": 109,
+    "Data Efficiency": 67
+  },
+  "code_by_area": {
+    "Generative Models, Editing & Creative Vision": {
+      "papers": 750,
+      "with_code_or_resource": 161,
+      "with_github": 110
+    },
+    "3D Vision, Geometry & Neural Rendering": {
+      "papers": 748,
+      "with_code_or_resource": 156,
+      "with_github": 83
+    },
+    "Learning, Optimization & Efficient Foundation Models": {
+      "papers": 457,
+      "with_code_or_resource": 111,
+      "with_github": 103
+    },
+    "Video, Motion & Temporal Understanding": {
+      "papers": 417,
+      "with_code_or_resource": 88,
+      "with_github": 60
+    },
+    "Vision-Language & Multimodal Intelligence": {
+      "papers": 352,
+      "with_code_or_resource": 77,
+      "with_github": 55
+    },
+    "Recognition, Detection & Segmentation": {
+      "papers": 341,
+      "with_code_or_resource": 99,
+      "with_github": 86
+    },
+    "Datasets, Benchmarks & Evaluation": {
+      "papers": 250,
+      "with_code_or_resource": 79,
+      "with_github": 48
+    },
+    "Embodied AI, Robotics & Autonomous Driving": {
+      "papers": 220,
+      "with_code_or_resource": 41,
+      "with_github": 23
+    },
+    "Safety, Robustness, Privacy & Trustworthy CV": {
+      "papers": 201,
+      "with_code_or_resource": 50,
+      "with_github": 46
+    },
+    "Human-Centric Vision, Biometrics & Behavior": {
+      "papers": 138,
+      "with_code_or_resource": 30,
+      "with_github": 17
+    },
+    "Medical, Scientific, Remote-Sensing & Domain Vision": {
+      "papers": 84,
+      "with_code_or_resource": 23,
+      "with_github": 20
+    },
+    "Low-Level Vision & Computational Photography": {
+      "papers": 79,
+      "with_code_or_resource": 28,
+      "with_github": 26
+    },
+    "Document, OCR & Visual Information Extraction": {
+      "papers": 30,
+      "with_code_or_resource": 9,
+      "with_github": 8
+    },
+    "General Computer Vision": {
+      "papers": 2,
+      "with_code_or_resource": 0,
+      "with_github": 0
+    }
+  },
+  "taxonomy_note": "Automated title+abstract taxonomy. Use as a navigation layer, not as a peer-reviewed label."
+}

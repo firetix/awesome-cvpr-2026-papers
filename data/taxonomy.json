@@ -1,0 +1,57 @@
+{
+  "schema_version": "2026.1",
+  "note": "Automated navigation taxonomy generated from CVF titles and abstracts. Labels are intended for discovery, not as authoritative paper classifications.",
+  "primary_areas": {
+    "Generative Models, Editing & Creative Vision": "Papers that create, edit, synthesize, or control visual media, including diffusion, flow matching, image/video generation, style transfer, and creative reconstruction pipelines.",
+    "3D Vision, Geometry & Neural Rendering": "Papers focused on 3D understanding, multiview geometry, depth, pose, reconstruction, neural rendering, Gaussian splatting, SLAM, point clouds, meshes, and radiance-field style representations.",
+    "Learning, Optimization & Efficient Foundation Models": "Papers where the central contribution is training strategy, representation learning, distillation, compression, quantization, test-time adaptation, or efficient foundation-model use.",
+    "Video, Motion & Temporal Understanding": "Papers whose main signal is temporal: video understanding, motion modeling, tracking, frame-level dynamics, long-context video, scene flow, and temporal consistency.",
+    "Vision-Language & Multimodal Intelligence": "Papers connecting vision with language or other modalities, including VLMs, MLLMs, grounding, VQA, captioning, open-vocabulary recognition, and multimodal reasoning.",
+    "Recognition, Detection & Segmentation": "Papers centered on object/category recognition, detection, segmentation, localization, open-set/open-vocabulary recognition, and related dense prediction tasks.",
+    "Datasets, Benchmarks & Evaluation": "Papers whose contribution is primarily a dataset, benchmark, evaluation protocol, metric, diagnostic suite, or empirical measurement framework.",
+    "Embodied AI, Robotics & Autonomous Driving": "Papers tied to physical or simulated agents, including robotics, manipulation, navigation, autonomous driving, world models, and vision-language-action systems.",
+    "Safety, Robustness, Privacy & Trustworthy CV": "Papers that examine robustness, jailbreaks, adversarial behavior, privacy, watermarking, bias, uncertainty, out-of-distribution behavior, or safety evaluation.",
+    "Human-Centric Vision, Biometrics & Behavior": "Papers about people, bodies, hands, faces, gait, re-identification, gaze, emotion, talking heads, avatars, and human-object interaction.",
+    "Medical, Scientific, Remote-Sensing & Domain Vision": "Papers applying CV to specialized domains such as medical imaging, biology, pathology, remote sensing, aerial/satellite imagery, industrial inspection, and scientific measurement.",
+    "Low-Level Vision & Computational Photography": "Papers on restoration, super-resolution, denoising, deblurring, dehazing, HDR, low-light imaging, image quality, compression, ISP, and camera pipelines.",
+    "Document, OCR & Visual Information Extraction": "Papers about scene text, OCR, document parsing, chart/table understanding, layout analysis, reading order, and visual information extraction.",
+    "General Computer Vision": "Papers that did not receive a high-confidence match to a more specific automated category."
+  },
+  "novelty_angles": {
+    "New Representation": "The contribution changes how visual information is encoded, tokenized, factorized, or represented.",
+    "Model Architecture": "The contribution is mainly a network, module, backbone, attention mechanism, adapter, encoder-decoder, or architectural design.",
+    "Training / Pretraining Objective": "The contribution is mainly a loss, training schedule, pretraining strategy, distillation setup, or adaptation objective.",
+    "Data, Dataset or Synthetic-Data Engine": "The contribution is mainly a dataset, benchmark, annotation source, simulator, synthetic-data generator, or data pipeline.",
+    "Efficiency / Acceleration / Compression": "The contribution improves speed, memory, compute, model size, sampling cost, latency, or deployment practicality.",
+    "Multimodal Fusion / Grounding": "The contribution aligns, fuses, or grounds information across vision, language, audio, actions, or other modalities.",
+    "Reasoning, Planning or Agentic Control": "The contribution emphasizes reasoning, planning, control, agent behavior, policies, or decision-making.",
+    "Editing, Control or Compositionality": "The contribution improves controllability, editing, composition, style, layout, or attribute-level manipulation.",
+    "Geometry or Physical Prior": "The contribution injects 3D, geometric, multiview, camera, physics, ray, or rendering priors.",
+    "Robustness, Safety or Privacy Method": "The contribution proposes a method for safety, robustness, privacy, watermarking, bias mitigation, attacks, or defenses.",
+    "Evaluation, Benchmark or Metric": "The contribution creates or improves measurement, protocols, diagnostics, metrics, or leaderboards.",
+    "Application or System Integration": "The contribution packages multiple components into a practical system, framework, pipeline, or domain-specific solution.",
+    "Theoretical or Analytical Insight": "The contribution is primarily an analysis, theory, diagnostic study, or principled interpretation."
+  },
+  "improvement_axes": [
+    "Accuracy / Quality",
+    "3D / Physical Consistency",
+    "Temporal Consistency",
+    "Generalization / Robustness",
+    "Efficiency / Speed",
+    "Scalability",
+    "Controllability / Editability",
+    "Evaluation Clarity",
+    "Safety / Trustworthiness",
+    "Data Efficiency"
+  ],
+  "fields": {
+    "primary_area": "Dominant research area inferred from title and abstract.",
+    "secondary_area": "Second strongest area signal, useful for interdisciplinary papers.",
+    "novelty_angle": "The main type of methodological novelty inferred from evidence terms.",
+    "improvement_axis": "The primary kind of improvement the abstract appears to target.",
+    "application_context": "A coarse practical setting when a clear one is present.",
+    "approach_summary": "A short evidence sentence, usually from the abstract, describing the proposed method.",
+    "improvement_rationale": "A compact explanation of why the paper is likely to improve the target axis, anchored to abstract evidence.",
+    "taxonomy_confidence": "Heuristic confidence score from 0 to 1 based on label evidence and score margin."
+  }
+}
