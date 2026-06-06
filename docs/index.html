@@ -1,0 +1,556 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="description" content="Explore CVPR 2026 papers by research area, novelty angle, code availability, arXiv links, project pages, and GitHub repositories." />
+  <title>Awesome CVPR 2026 Papers Explorer</title>
+  <style>
+    :root {
+      --bg: #070b14;
+      --panel: rgba(16, 24, 39, 0.88);
+      --panel-2: rgba(30, 41, 59, 0.72);
+      --text: #e5edf7;
+      --muted: #9fb0c7;
+      --accent: #72e0ff;
+      --accent-2: #a78bfa;
+      --accent-3: #34d399;
+      --line: rgba(148, 163, 184, 0.22);
+      --danger: #fb7185;
+      --shadow: 0 24px 80px rgba(0, 0, 0, 0.35);
+      --radius: 22px;
+      color-scheme: dark;
+    }
+
+    * { box-sizing: border-box; }
+
+    body {
+      margin: 0;
+      font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      color: var(--text);
+      background:
+        radial-gradient(circle at 10% 0%, rgba(114, 224, 255, 0.18), transparent 34rem),
+        radial-gradient(circle at 85% 6%, rgba(167, 139, 250, 0.18), transparent 32rem),
+        linear-gradient(180deg, #070b14 0%, #0d1322 48%, #070b14 100%);
+      min-height: 100vh;
+    }
+
+    a { color: inherit; }
+
+    .shell {
+      width: min(1180px, calc(100vw - 32px));
+      margin: 0 auto;
+    }
+
+    .hero {
+      padding: 56px 0 30px;
+    }
+
+    .eyebrow {
+      display: inline-flex;
+      gap: 8px;
+      align-items: center;
+      padding: 8px 12px;
+      border: 1px solid var(--line);
+      border-radius: 999px;
+      color: var(--accent);
+      background: rgba(15, 23, 42, 0.72);
+      font-size: 13px;
+      letter-spacing: 0.02em;
+    }
+
+    h1 {
+      margin: 20px 0 12px;
+      font-size: clamp(38px, 7vw, 78px);
+      line-height: 0.95;
+      letter-spacing: -0.06em;
+      max-width: 960px;
+    }
+
+    .gradient-text {
+      background: linear-gradient(90deg, var(--accent), var(--accent-2) 48%, var(--accent-3));
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+    }
+
+    .lede {
+      max-width: 820px;
+      color: var(--muted);
+      font-size: 18px;
+      line-height: 1.72;
+      margin: 0 0 28px;
+    }
+
+    .hero-actions, .link-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+    }
+
+    .button {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      min-height: 42px;
+      padding: 10px 16px;
+      border-radius: 14px;
+      border: 1px solid var(--line);
+      background: rgba(15, 23, 42, 0.75);
+      color: var(--text);
+      text-decoration: none;
+      font-weight: 700;
+      transition: transform 0.18s ease, border-color 0.18s ease, background 0.18s ease;
+    }
+
+    .button:hover {
+      transform: translateY(-1px);
+      border-color: rgba(114, 224, 255, 0.56);
+      background: rgba(30, 41, 59, 0.94);
+    }
+
+    .button.primary {
+      color: #04111f;
+      background: linear-gradient(135deg, var(--accent), var(--accent-3));
+      border: none;
+    }
+
+    .stats-grid {
+      display: grid;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      gap: 14px;
+      margin: 28px 0;
+    }
+
+    .stat-card, .panel, .paper-card {
+      border: 1px solid var(--line);
+      background: var(--panel);
+      box-shadow: var(--shadow);
+      backdrop-filter: blur(20px);
+      border-radius: var(--radius);
+    }
+
+    .stat-card {
+      padding: 18px;
+    }
+
+    .stat-value {
+      display: block;
+      font-size: 28px;
+      font-weight: 900;
+      letter-spacing: -0.04em;
+    }
+
+    .stat-label {
+      color: var(--muted);
+      font-size: 13px;
+      line-height: 1.4;
+    }
+
+    .panel {
+      padding: 18px;
+      margin: 18px 0;
+    }
+
+    .filters {
+      display: grid;
+      grid-template-columns: 2fr 1fr 1fr 0.85fr;
+      gap: 12px;
+      align-items: end;
+    }
+
+    label {
+      display: block;
+      color: var(--muted);
+      font-size: 12px;
+      margin-bottom: 7px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+    }
+
+    input, select {
+      width: 100%;
+      min-height: 43px;
+      border-radius: 13px;
+      border: 1px solid var(--line);
+      background: rgba(2, 6, 23, 0.7);
+      color: var(--text);
+      padding: 10px 12px;
+      outline: none;
+    }
+
+    input:focus, select:focus {
+      border-color: rgba(114, 224, 255, 0.75);
+      box-shadow: 0 0 0 3px rgba(114, 224, 255, 0.12);
+    }
+
+    .toggle {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      min-height: 43px;
+      padding: 10px 12px;
+      border-radius: 13px;
+      border: 1px solid var(--line);
+      background: rgba(2, 6, 23, 0.7);
+      color: var(--text);
+      font-weight: 800;
+      cursor: pointer;
+    }
+
+    .toggle input { width: auto; min-height: auto; }
+
+    .toolbar {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      gap: 12px;
+      align-items: center;
+      margin-top: 14px;
+      color: var(--muted);
+    }
+
+    .paper-list {
+      display: grid;
+      gap: 14px;
+      margin: 18px 0 32px;
+    }
+
+    .paper-card {
+      padding: 18px;
+      overflow: hidden;
+      position: relative;
+    }
+
+    .paper-card::before {
+      content: "";
+      position: absolute;
+      inset: 0 auto 0 0;
+      width: 4px;
+      background: linear-gradient(180deg, var(--accent), var(--accent-2));
+      opacity: 0.85;
+    }
+
+    .paper-title {
+      margin: 0 0 10px;
+      font-size: 18px;
+      line-height: 1.35;
+      letter-spacing: -0.02em;
+    }
+
+    .authors {
+      margin: 0 0 12px;
+      color: var(--muted);
+      line-height: 1.55;
+      font-size: 14px;
+    }
+
+    .chips {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin: 12px 0;
+    }
+
+    .chip {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 6px 9px;
+      border: 1px solid var(--line);
+      border-radius: 999px;
+      color: #dce8f8;
+      background: rgba(15, 23, 42, 0.86);
+      font-size: 12px;
+      font-weight: 700;
+    }
+
+    .chip.code { color: #bbf7d0; border-color: rgba(52, 211, 153, 0.36); }
+    .chip.no-code { color: #fecdd3; border-color: rgba(251, 113, 133, 0.34); }
+
+    .rationale {
+      margin: 12px 0 0;
+      color: #c8d4e5;
+      line-height: 1.65;
+      font-size: 14px;
+    }
+
+    .card-links {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-top: 14px;
+    }
+
+    .card-links a {
+      color: var(--accent);
+      text-decoration: none;
+      font-size: 13px;
+      font-weight: 800;
+      border-bottom: 1px solid transparent;
+    }
+
+    .card-links a:hover { border-color: currentColor; }
+
+    .empty {
+      padding: 32px;
+      text-align: center;
+      color: var(--muted);
+    }
+
+    .mini-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 16px;
+    }
+
+    .bar-row {
+      display: grid;
+      grid-template-columns: minmax(120px, 1.2fr) 2fr 54px;
+      gap: 10px;
+      align-items: center;
+      margin: 10px 0;
+      color: var(--muted);
+      font-size: 13px;
+    }
+
+    .bar {
+      height: 9px;
+      border-radius: 999px;
+      background: rgba(148, 163, 184, 0.16);
+      overflow: hidden;
+    }
+
+    .bar > span {
+      display: block;
+      height: 100%;
+      border-radius: inherit;
+      background: linear-gradient(90deg, var(--accent), var(--accent-2));
+    }
+
+    footer {
+      padding: 28px 0 48px;
+      color: var(--muted);
+      line-height: 1.6;
+    }
+
+    @media (max-width: 860px) {
+      .stats-grid, .filters, .mini-grid { grid-template-columns: 1fr; }
+      .hero { padding-top: 34px; }
+      .bar-row { grid-template-columns: 1fr; gap: 6px; }
+    }
+  </style>
+</head>
+<body>
+  <main class="shell">
+    <section class="hero">
+      <span class="eyebrow">CVPR 2026 research map · papers · code · arXiv · projects</span>
+      <h1>Explore <span class="gradient-text">CVPR 2026 papers</span> by ideas, code, and research direction.</h1>
+      <p class="lede">This interactive explorer turns the Awesome CVPR 2026 Papers repository into a searchable discovery interface. Filter thousands of papers by broad research area, novelty angle, implementation availability, and practical improvement mechanism.</p>
+      <div class="hero-actions">
+        <a class="button primary" href="#explorer">Open Explorer</a>
+        <a class="button" href="https://github.com/firetix/awesome-cvpr-2026-papers">View GitHub Repository</a>
+        <a class="button" href="https://github.com/firetix/awesome-cvpr-2026-papers/blob/main/research-map.md">Read Research Map</a>
+      </div>
+    </section>
+
+    <section class="stats-grid" aria-label="Dataset statistics">
+      <article class="stat-card"><span class="stat-value" id="paperCount">—</span><span class="stat-label">CVPR 2026 papers indexed</span></article>
+      <article class="stat-card"><span class="stat-value" id="codeCount">—</span><span class="stat-label">papers with public code or resources</span></article>
+      <article class="stat-card"><span class="stat-value" id="githubCount">—</span><span class="stat-label">direct GitHub repository links</span></article>
+      <article class="stat-card"><span class="stat-value" id="arxivCount">—</span><span class="stat-label">arXiv links discovered</span></article>
+    </section>
+
+    <section class="panel mini-grid" aria-label="Research distribution">
+      <div>
+        <h2>Top Research Areas</h2>
+        <div id="areaBars"></div>
+      </div>
+      <div>
+        <h2>Top Novelty Angles</h2>
+        <div id="noveltyBars"></div>
+      </div>
+    </section>
+
+    <section class="panel" id="explorer">
+      <h2>Paper Explorer</h2>
+      <div class="filters">
+        <div>
+          <label for="searchInput">Search title, authors, links, or rationale</label>
+          <input id="searchInput" type="search" placeholder="Try: diffusion, 3D, segmentation, medical, autonomous driving..." autocomplete="off" />
+        </div>
+        <div>
+          <label for="areaSelect">Research area</label>
+          <select id="areaSelect"><option value="">All areas</option></select>
+        </div>
+        <div>
+          <label for="noveltySelect">Novelty angle</label>
+          <select id="noveltySelect"><option value="">All novelty angles</option></select>
+        </div>
+        <div>
+          <label>Implementation</label>
+          <span class="toggle"><input id="codeOnly" type="checkbox" /> Code only</span>
+        </div>
+      </div>
+      <div class="toolbar">
+        <span id="resultSummary">Loading papers…</span>
+        <div class="link-row">
+          <button class="button" id="resetButton" type="button">Reset filters</button>
+          <button class="button" id="loadMoreButton" type="button">Load more</button>
+        </div>
+      </div>
+    </section>
+
+    <section class="paper-list" id="paperList" aria-live="polite"></section>
+
+    <footer>
+      <p><strong>About the labels.</strong> Research areas, novelty angles, and improvement rationales are intended as a practical discovery layer inferred from repository metadata and abstracts. They should be treated as navigation aids rather than peer-reviewed classifications.</p>
+      <p>Built from the public dataset in <a href="https://github.com/firetix/awesome-cvpr-2026-papers">awesome-cvpr-2026-papers</a>.</p>
+    </footer>
+  </main>
+
+  <script>
+    const state = {
+      all: [],
+      filtered: [],
+      visible: 50,
+      data: null,
+    };
+
+    const el = (id) => document.getElementById(id);
+    const fmt = (n) => Number(n || 0).toLocaleString();
+    const safe = (value) => String(value || '').replace(/[&<>'"]/g, (c) => ({'&':'&amp;','<':'&lt;','>':'&gt;',"'":'&#39;','"':'&quot;'}[c]));
+    const has = (value) => Boolean(String(value || '').trim());
+
+    function optionList(select, values) {
+      values.forEach((value) => {
+        if (!value) return;
+        const option = document.createElement('option');
+        option.value = value;
+        option.textContent = value;
+        select.appendChild(option);
+      });
+    }
+
+    function topEntries(obj, limit = 8) {
+      return Object.entries(obj || {}).sort((a, b) => b[1] - a[1]).slice(0, limit);
+    }
+
+    function renderBars(target, entries) {
+      const max = Math.max(...entries.map(([, count]) => count), 1);
+      target.innerHTML = entries.map(([name, count]) => `
+        <div class="bar-row">
+          <span title="${safe(name)}">${safe(name)}</span>
+          <span class="bar"><span style="width:${Math.max(4, (count / max) * 100)}%"></span></span>
+          <strong>${fmt(count)}</strong>
+        </div>
+      `).join('');
+    }
+
+    function paperLinks(paper) {
+      const links = [];
+      if (has(paper.paper_url)) links.push(`<a href="${safe(paper.paper_url)}" target="_blank" rel="noopener">CVF/Paper</a>`);
+      if (has(paper.arxiv_url)) links.push(`<a href="${safe(paper.arxiv_url)}" target="_blank" rel="noopener">arXiv</a>`);
+      if (has(paper.github_url)) links.push(`<a href="${safe(paper.github_url)}" target="_blank" rel="noopener">GitHub</a>`);
+      if (has(paper.project_url)) links.push(`<a href="${safe(paper.project_url)}" target="_blank" rel="noopener">Project</a>`);
+      if (has(paper.code_url) && paper.code_url !== paper.github_url && paper.code_url !== paper.project_url) {
+        links.push(`<a href="${safe(paper.code_url)}" target="_blank" rel="noopener">Code/Resource</a>`);
+      }
+      return links.join('');
+    }
+
+    function renderPapers() {
+      const list = el('paperList');
+      const shown = state.filtered.slice(0, state.visible);
+      el('resultSummary').textContent = `${fmt(state.filtered.length)} matching papers · showing ${fmt(shown.length)}`;
+      el('loadMoreButton').style.display = shown.length < state.filtered.length ? 'inline-flex' : 'none';
+
+      if (!shown.length) {
+        list.innerHTML = '<div class="panel empty">No papers match the current filters. Try broadening the query or resetting filters.</div>';
+        return;
+      }
+
+      list.innerHTML = shown.map((paper) => `
+        <article class="paper-card">
+          <h3 class="paper-title">${safe(paper.title)}</h3>
+          <p class="authors">${safe(paper.authors)}</p>
+          <div class="chips">
+            <span class="chip">${safe(paper.primary_area || 'Uncategorized')}</span>
+            ${has(paper.secondary_area) ? `<span class="chip">Secondary: ${safe(paper.secondary_area)}</span>` : ''}
+            <span class="chip">${safe(paper.novelty_angle || 'Unspecified novelty')}</span>
+            <span class="chip">${safe(paper.improvement_axis || 'Unspecified improvement')}</span>
+            <span class="chip ${paper.has_code ? 'code' : 'no-code'}">${paper.has_code ? 'Code available' : 'No code found'}</span>
+          </div>
+          ${has(paper.improvement_rationale) ? `<p class="rationale">${safe(paper.improvement_rationale)}</p>` : ''}
+          <div class="card-links">${paperLinks(paper)}</div>
+        </article>
+      `).join('');
+    }
+
+    function applyFilters() {
+      const query = el('searchInput').value.trim().toLowerCase();
+      const area = el('areaSelect').value;
+      const novelty = el('noveltySelect').value;
+      const codeOnly = el('codeOnly').checked;
+
+      state.filtered = state.all.filter((paper) => {
+        if (area && paper.primary_area !== area) return false;
+        if (novelty && paper.novelty_angle !== novelty) return false;
+        if (codeOnly && !paper.has_code) return false;
+        if (!query) return true;
+        const haystack = [paper.title, paper.authors, paper.primary_area, paper.secondary_area, paper.novelty_angle, paper.improvement_axis, paper.improvement_rationale, paper.github_url, paper.project_url, paper.arxiv_url].join(' ').toLowerCase();
+        return haystack.includes(query);
+      });
+
+      state.visible = 50;
+      renderPapers();
+    }
+
+    async function init() {
+      try {
+        const response = await fetch('data/papers.min.json', { cache: 'no-store' });
+        if (!response.ok) throw new Error(`Unable to load data: ${response.status}`);
+        state.data = await response.json();
+        state.all = state.data.papers || [];
+        state.filtered = state.all;
+
+        el('paperCount').textContent = fmt(state.data.paper_count);
+        el('codeCount').textContent = fmt(state.data.code_count);
+        el('githubCount').textContent = fmt(state.data.github_count);
+        el('arxivCount').textContent = fmt(state.data.arxiv_count);
+
+        optionList(el('areaSelect'), Object.keys(state.data.areas || {}).sort());
+        optionList(el('noveltySelect'), Object.keys(state.data.novelty_angles || {}).sort());
+        renderBars(el('areaBars'), topEntries(state.data.areas, 8));
+        renderBars(el('noveltyBars'), topEntries(state.data.novelty_angles, 8));
+        renderPapers();
+      } catch (error) {
+        el('resultSummary').textContent = 'Data failed to load.';
+        el('paperList').innerHTML = `<div class="panel empty">${safe(error.message)}</div>`;
+      }
+    }
+
+    ['searchInput', 'areaSelect', 'noveltySelect', 'codeOnly'].forEach((id) => {
+      el(id).addEventListener('input', applyFilters);
+      el(id).addEventListener('change', applyFilters);
+    });
+
+    el('resetButton').addEventListener('click', () => {
+      el('searchInput').value = '';
+      el('areaSelect').value = '';
+      el('noveltySelect').value = '';
+      el('codeOnly').checked = false;
+      applyFilters();
+    });
+
+    el('loadMoreButton').addEventListener('click', () => {
+      state.visible += 50;
+      renderPapers();
+    });
+
+    init();
+  </script>
+</body>
+</html>
