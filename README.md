@@ -2,16 +2,19 @@
 
 **A research-map-driven index of CVPR 2026 papers with code availability, GitHub repositories, arXiv links, project pages, and practical taxonomy labels.**
 
+**Live explorer:** [firetix.github.io/awesome-cvpr-2026-papers](https://firetix.github.io/awesome-cvpr-2026-papers/)
+
 This repository turns the CVPR 2026 proceedings into a browsable and machine-readable discovery layer for researchers, engineers, students, founders, and applied AI teams. Instead of being only a flat list of papers, **`awesome-cvpr-2026-papers`** combines official CVF metadata, arXiv links, public code/resource discovery, project websites, abstracts, and automatically inferred research categories so that readers can quickly find papers that are both scientifically relevant and practically actionable.[1] [2] [3]
 
 > The official CVF Open Access repository states that the available papers are open-access versions provided by the Computer Vision Foundation and that, except for the watermark, they are identical to the accepted versions; the final proceedings version is available through IEEE Xplore.[1]
 
 ## Start Here
 
-The fastest way to use the repository is to choose the entry point that matches your goal. The Markdown files are optimized for human browsing, while the CSV and JSON exports are designed for systematic literature review, internal research tooling, dashboards, and search applications.
+The fastest way to use the repository is to choose the entry point that matches your goal. The GitHub Pages explorer is optimized for quick visual browsing and filtering, the Markdown files are optimized for durable repository-native navigation, and the CSV and JSON exports are designed for systematic literature review, internal research tooling, dashboards, and search applications.
 
 | Goal | Start With | Best For |
 |---|---|---|
+| Explore papers interactively on the web | [GitHub Pages Explorer](https://firetix.github.io/awesome-cvpr-2026-papers/) | Search, filter, and scan the full collection in a browser-friendly interface. |
 | Browse every indexed CVPR 2026 paper | [`papers.md`](papers.md) | Full proceedings-style navigation with CVF, arXiv, code, GitHub, and website links. |
 | Find papers with implementations or public resources | [`papers-with-code.md`](papers-with-code.md) | Engineers, practitioners, and reproducibility-focused readers. |
 | Understand the big research directions | [`research-map.md`](research-map.md) | Strategic overviews, literature planning, and field-level trend discovery. |
@@ -81,6 +84,7 @@ The repository is intentionally organized around both **human-readable Markdown*
 
 | File | Purpose |
 |---|---|
+| [GitHub Pages Explorer](https://firetix.github.io/awesome-cvpr-2026-papers/) | Interactive browser-based explorer backed by `docs/data/papers.min.json`, with search, filtering, and direct links to papers and resources. |
 | [`papers.md`](papers.md) | Full Markdown index of all parsed CVPR 2026 papers, including authors, arXiv, CVF PDF, poster, code flag, GitHub links, and project links. |
 | [`papers-with-code.md`](papers-with-code.md) | Focused Markdown index of papers with public code, data, demo, model, project, or implementation resources. |
 | [`research-map.md`](research-map.md) | Strategic research map summarizing CVPR 2026 by broad area, novelty angle, improvement axis, and code availability. |
