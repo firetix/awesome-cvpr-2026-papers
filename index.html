@@ -155,7 +155,7 @@
 
     .filters {
       display: grid;
-      grid-template-columns: 2fr 1fr 1fr 0.85fr 0.95fr;
+      grid-template-columns: 1.55fr 1.25fr 1fr 1fr 1fr;
       gap: 12px;
       align-items: end;
     }
@@ -270,6 +270,7 @@
     .chip.code { color: #bbf7d0; border-color: rgba(52, 211, 153, 0.36); }
     .chip.github { color: #bfdbfe; border-color: rgba(96, 165, 250, 0.42); text-decoration: none; }
     .chip.github:hover { border-color: rgba(114, 224, 255, 0.72); background: rgba(30, 64, 175, 0.28); }
+    .chip.theme { color: #fef3c7; border-color: rgba(251, 191, 36, 0.42); background: rgba(120, 53, 15, 0.24); }
     .chip.no-code { color: #fecdd3; border-color: rgba(251, 113, 133, 0.34); }
 
     .rationale {
@@ -350,7 +351,7 @@
     <section class="hero">
       <span class="eyebrow">CVPR 2026 research map · papers · code · arXiv · projects</span>
       <h1>Explore <span class="gradient-text">CVPR 2026 papers</span> by ideas, code, and research direction.</h1>
-      <p class="lede">This interactive explorer turns the Awesome CVPR 2026 Papers repository into a searchable discovery interface. Filter thousands of papers by broad research area, novelty angle, implementation availability, and practical improvement mechanism.</p>
+      <p class="lede">This interactive explorer turns the Awesome CVPR 2026 Papers repository into a searchable discovery interface. Filter thousands of papers by broad research area, novelty angle, SafeWorld safety-validation theme, repository availability, and practical improvement mechanism.</p>
       <div class="hero-actions">
         <a class="button primary" href="#explorer">Open Explorer</a>
         <a class="button" href="https://github.com/firetix/awesome-cvpr-2026-papers">View GitHub Repository</a>
@@ -380,8 +381,12 @@
       <h2>Paper Explorer</h2>
       <div class="filters">
         <div>
-          <label for="searchInput">Search title, authors, links, or rationale</label>
-          <input id="searchInput" type="search" placeholder="Try: diffusion, 3D, segmentation, medical, autonomous driving..." autocomplete="off" />
+          <label for="searchInput">Search title, authors, links, themes, or rationale</label>
+          <input id="searchInput" type="search" placeholder="Try: SafeWorld, sim-to-real, human detection, scenario generation..." autocomplete="off" />
+        </div>
+        <div>
+          <label for="themeSelect">SafeWorld theme</label>
+          <select id="themeSelect"><option value="">All SafeWorld themes</option></select>
         </div>
         <div>
           <label for="areaSelect">Research area</label>
@@ -392,12 +397,14 @@
           <select id="noveltySelect"><option value="">All novelty angles</option></select>
         </div>
         <div>
-          <label>Implementation</label>
-          <span class="toggle"><input id="codeOnly" type="checkbox" /> Code only</span>
-        </div>
-        <div>
-          <label>Repository</label>
-          <span class="toggle"><input id="githubOnly" type="checkbox" /> GitHub repo only</span>
+          <label for="repoSelect">Code / repository</label>
+          <select id="repoSelect">
+            <option value="">All papers</option>
+            <option value="code">Any code or resource</option>
+            <option value="github">GitHub repo only</option>
+            <option value="no-github">No GitHub repo</option>
+            <option value="no-code">No code or resource</option>
+          </select>
         </div>
       </div>
       <div class="toolbar">
@@ -429,6 +436,61 @@
     const fmt = (n) => Number(n || 0).toLocaleString();
     const safe = (value) => String(value || '').replace(/[&<>'"]/g, (c) => ({'&':'&amp;','<':'&lt;','>':'&gt;',"'":'&#39;','"':'&quot;'}[c]));
     const has = (value) => Boolean(String(value || '').trim());
+
+
+    const SAFEWORLD_THEMES = [
+      {
+        name: 'Standards-to-scenario generation',
+        keywords: ['iso 10218', 'iso/ts 15066', 'iso 15066', 'ansi', 'ria r15', 'osha', 'iec 61508', 'iso 13849', 'standard', 'regulation', 'hazard', 'risk assessment', 'assurance case', 'safety case', 'gsn', 'traceability', 'scenario generation'],
+      },
+      {
+        name: 'Physical HRI safety constraints',
+        keywords: ['human-robot interaction', 'hri', 'speed and separation', 'separation monitoring', 'power and force', 'force limiting', 'biomechanical', 'injury', 'impact', 'contact force', 'pressure', 'torque', 'momentum', 'stop distance', 'safety constraint', 'collision avoidance'],
+      },
+      {
+        name: 'Safe human detection and multimodal perception',
+        keywords: ['human detection', 'person detection', 'pedestrian detection', 'camera lidar', 'camera-lidar', 'lidar camera', 'radar camera', 'radar-camera', 'bev fusion', 'multimodal detection', 'sensor fusion', 'pose estimation', 'segmentation', 'occlusion', 'false negative', 'low light', 'motion blur', 'uncertainty', 'out-of-distribution', 'ood'],
+      },
+      {
+        name: 'Simulation-to-reality validation',
+        keywords: ['sim-to-real', 'sim2real', 'simulation-to-reality', 'digital twin', 'domain randomization', 'sensor simulation', 'synthetic data', 'counterfactual simulation', 'replay', 'calibration', 'transferability', 'reality gap', 'simulator', 'simulation'],
+      },
+      {
+        name: 'Safety benchmarks for embodied AI and robot policies',
+        keywords: ['embodied ai', 'robot policy', 'robot foundation model', 'vla', 'vision-language-action', 'vlm', 'benchmark', 'unsafe instruction', 'affordance', 'social navigation safety', 'overtrust', 'hallucination', 'unsafe planning', 'safety benchmark', 'evaluation'],
+      },
+      {
+        name: 'Human motion, social navigation, and behavior prediction',
+        keywords: ['human motion', 'motion generation', 'trajectory prediction', 'pedestrian trajectory', 'social navigation', 'proxemics', 'intent prediction', 'crowd', 'multi-human', 'worker', 'falls', 'slips', 'kneeling', 'reaching', 'sudden stops', 'adversarial human'],
+      },
+      {
+        name: 'Scenario generation, rare event discovery, and adversarial testing',
+        keywords: ['falsification', 'adversarial scenario', 'rare event', 'failure discovery', 'bayesian optimization', 'search-based testing', 'causal', 'coverage-guided', 'metamorphic testing', 'stress test', 'corner case', 'edge case', 'scenario generation', 'adversarial testing', 'reinforcement learning'],
+      },
+      {
+        name: 'Formal methods and runtime assurance',
+        keywords: ['control barrier function', 'barrier function', 'reachability', 'runtime monitor', 'formal verification', 'temporal logic', 'safety shield', 'runtime assurance', 'verified planning', 'formal method', 'monitor', 'constraint'],
+      },
+      {
+        name: 'Safety-rated perception and certification of ML',
+        keywords: ['ml safety', 'safety-critical', 'uncertainty quantification', 'confidence calibration', 'conformal prediction', 'ood detection', 'dataset coverage', 'perception redundancy', 'sotif', 'iso 26262', 'certification', 'safety-rated', 'false negative', 'failure distribution'],
+      },
+      {
+        name: 'Robotics simulators and physics fidelity',
+        keywords: ['simulator', 'physics simulator', 'physics fidelity', 'contact stability', 'sensor realism', 'mujoco', 'isaac sim', 'genesis', 'newton', 'ros2', 'headless', 'domain randomization', 'manipulation', 'humanoid', 'batch simulation'],
+      },
+    ];
+
+    function paperText(paper) {
+      return [paper.title, paper.authors, paper.primary_area, paper.secondary_area, paper.novelty_angle, paper.improvement_axis, paper.improvement_rationale, paper.paper_url, paper.arxiv_url, paper.project_url, paper.github_url, paper.code_url].join(' ').toLowerCase();
+    }
+
+    function matchedSafeWorldThemes(paper) {
+      const text = paperText(paper);
+      return SAFEWORLD_THEMES
+        .filter((theme) => theme.keywords.some((keyword) => text.includes(keyword)))
+        .map((theme) => theme.name);
+    }
 
     function optionList(select, values) {
       values.forEach((value) => {
@@ -487,6 +549,7 @@
             ${has(paper.secondary_area) ? `<span class="chip">Secondary: ${safe(paper.secondary_area)}</span>` : ''}
             <span class="chip">${safe(paper.novelty_angle || 'Unspecified novelty')}</span>
             <span class="chip">${safe(paper.improvement_axis || 'Unspecified improvement')}</span>
+            ${(paper.safeworld_themes || []).slice(0, 2).map((theme) => `<span class="chip theme">SafeWorld: ${safe(theme)}</span>`).join('')}
             <span class="chip ${paper.has_code ? 'code' : 'no-code'}">${paper.has_code ? 'Code available' : 'No code found'}</span>
             ${has(paper.github_url) ? `<a class="chip github" href="${safe(paper.github_url)}" target="_blank" rel="noopener" aria-label="Open GitHub repository for ${safe(paper.title)}">GitHub repo</a>` : ''}
           </div>
@@ -498,18 +561,22 @@
 
     function applyFilters() {
       const query = el('searchInput').value.trim().toLowerCase();
+      const theme = el('themeSelect').value;
       const area = el('areaSelect').value;
       const novelty = el('noveltySelect').value;
-      const codeOnly = el('codeOnly').checked;
-      const githubOnly = el('githubOnly').checked;
+      const repoFilter = el('repoSelect').value;
 
       state.filtered = state.all.filter((paper) => {
+        if (theme && !(paper.safeworld_themes || []).includes(theme)) return false;
         if (area && paper.primary_area !== area) return false;
         if (novelty && paper.novelty_angle !== novelty) return false;
-        if (codeOnly && !paper.has_code) return false;
-        if (githubOnly && !has(paper.github_url)) return false;
+        if (repoFilter === 'code' && !paper.has_code) return false;
+        if (repoFilter === 'github' && !has(paper.github_url)) return false;
+        if (repoFilter === 'no-github' && has(paper.github_url)) return false;
+        if (repoFilter === 'no-code' && paper.has_code) return false;
         if (!query) return true;
-        const haystack = [paper.title, paper.authors, paper.primary_area, paper.secondary_area, paper.novelty_angle, paper.improvement_axis, paper.improvement_rationale, paper.github_url, paper.project_url, paper.arxiv_url].join(' ').toLowerCase();
+        const themeText = (paper.safeworld_themes || []).length ? `SafeWorld ${(paper.safeworld_themes || []).join(' ')}` : '';
+        const haystack = [paper.title, paper.authors, paper.primary_area, paper.secondary_area, paper.novelty_angle, paper.improvement_axis, paper.improvement_rationale, paper.github_url, paper.project_url, paper.arxiv_url, themeText].join(' ').toLowerCase();
         return haystack.includes(query);
       });
 
@@ -522,7 +589,7 @@
         const response = await fetch('data/papers.min.json', { cache: 'no-store' });
         if (!response.ok) throw new Error(`Unable to load data: ${response.status}`);
         state.data = await response.json();
-        state.all = state.data.papers || [];
+        state.all = (state.data.papers || []).map((paper) => ({ ...paper, safeworld_themes: matchedSafeWorldThemes(paper) }));
         state.filtered = state.all;
 
         el('paperCount').textContent = fmt(state.data.paper_count);
@@ -530,6 +597,7 @@
         el('githubCount').textContent = fmt(state.data.github_count);
         el('arxivCount').textContent = fmt(state.data.arxiv_count);
 
+        optionList(el('themeSelect'), SAFEWORLD_THEMES.map((theme) => theme.name));
         optionList(el('areaSelect'), Object.keys(state.data.areas || {}).sort());
         optionList(el('noveltySelect'), Object.keys(state.data.novelty_angles || {}).sort());
         renderBars(el('areaBars'), topEntries(state.data.areas, 8));
@@ -541,17 +609,17 @@
       }
     }
 
-    ['searchInput', 'areaSelect', 'noveltySelect', 'codeOnly', 'githubOnly'].forEach((id) => {
+    ['searchInput', 'themeSelect', 'areaSelect', 'noveltySelect', 'repoSelect'].forEach((id) => {
       el(id).addEventListener('input', applyFilters);
       el(id).addEventListener('change', applyFilters);
     });
 
     el('resetButton').addEventListener('click', () => {
       el('searchInput').value = '';
+      el('themeSelect').value = '';
       el('areaSelect').value = '';
       el('noveltySelect').value = '';
-      el('codeOnly').checked = false;
-      el('githubOnly').checked = false;
+      el('repoSelect').value = '';
       applyFilters();
     });
 
