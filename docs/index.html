@@ -215,7 +215,31 @@
     .paper-list {
       display: grid;
       gap: 14px;
-      margin: 18px 0 32px;
+      margin: 18px 0 18px;
+    }
+
+    .load-more-panel {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      align-items: center;
+      gap: 14px;
+      padding: 18px;
+      margin: 8px 0 32px;
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      background: linear-gradient(135deg, rgba(15, 23, 42, 0.92), rgba(30, 41, 59, 0.72));
+      color: var(--muted);
+      box-shadow: var(--shadow);
+    }
+
+    .load-more-panel[hidden] {
+      display: none;
+    }
+
+    .load-more-panel p {
+      margin: 0;
+      line-height: 1.55;
     }
 
     .paper-card {
@@ -418,6 +442,11 @@
 
     <section class="paper-list" id="paperList" aria-live="polite"></section>
 
+    <section class="load-more-panel" id="loadMorePanel" hidden>
+      <p id="loadMoreSummary">More matching papers are available.</p>
+      <button class="button primary" id="loadMoreBottomButton" type="button" aria-controls="paperList">Load more papers</button>
+    </section>
+
     <footer>
       <p><strong>About the labels.</strong> Research areas, novelty angles, and improvement rationales are intended as a practical discovery layer inferred from repository metadata and abstracts. They should be treated as navigation aids rather than peer-reviewed classifications.</p>
       <p>Built from the public dataset in <a href="https://github.com/firetix/awesome-cvpr-2026-papers">awesome-cvpr-2026-papers</a>.</p>
@@ -425,10 +454,12 @@
   </main>
 
   <script>
+    const PAGE_SIZE = 50;
+
     const state = {
       all: [],
       filtered: [],
-      visible: 50,
+      visible: PAGE_SIZE,
       data: null,
     };
 
@@ -529,11 +560,33 @@
       return links.join('');
     }
 
+    function updateLoadMoreControls(shownCount) {
+      const remaining = Math.max(0, state.filtered.length - shownCount);
+      const hasMore = remaining > 0;
+      const nextCount = Math.min(PAGE_SIZE, remaining);
+      const topButton = el('loadMoreButton');
+      const bottomPanel = el('loadMorePanel');
+      const bottomButton = el('loadMoreBottomButton');
+
+      topButton.style.display = hasMore ? 'inline-flex' : 'none';
+      topButton.textContent = hasMore ? `Load ${fmt(nextCount)} more` : 'All results shown';
+      topButton.setAttribute('aria-expanded', String(!hasMore));
+      bottomPanel.hidden = !hasMore;
+
+      if (hasMore) {
+        el('loadMoreSummary').textContent = `Showing ${fmt(shownCount)} of ${fmt(state.filtered.length)} matching papers. ${fmt(remaining)} more are available.`;
+        bottomButton.textContent = `Load ${fmt(nextCount)} more papers`;
+      } else {
+        el('loadMoreSummary').textContent = `Showing all ${fmt(shownCount)} matching papers.`;
+        bottomButton.textContent = 'All matching papers shown';
+      }
+    }
+
     function renderPapers() {
       const list = el('paperList');
       const shown = state.filtered.slice(0, state.visible);
-      el('resultSummary').textContent = `${fmt(state.filtered.length)} matching papers · showing ${fmt(shown.length)}`;
-      el('loadMoreButton').style.display = shown.length < state.filtered.length ? 'inline-flex' : 'none';
+      el('resultSummary').textContent = `${fmt(state.filtered.length)} matching papers · showing ${fmt(shown.length)} of ${fmt(state.filtered.length)}`;
+      updateLoadMoreControls(shown.length);
 
       if (!shown.length) {
         list.innerHTML = '<div class="panel empty">No papers match the current filters. Try broadening the query or resetting filters.</div>';
@@ -580,7 +633,7 @@
         return haystack.includes(query);
       });
 
-      state.visible = 50;
+      state.visible = PAGE_SIZE;
       renderPapers();
     }
 
@@ -623,10 +676,13 @@
       applyFilters();
     });
 
-    el('loadMoreButton').addEventListener('click', () => {
-      state.visible += 50;
+    function loadMorePapers() {
+      state.visible = Math.min(state.visible + PAGE_SIZE, state.filtered.length);
       renderPapers();
-    });
+    }
+
+    el('loadMoreButton').addEventListener('click', loadMorePapers);
+    el('loadMoreBottomButton').addEventListener('click', loadMorePapers);
 
     init();
   </script>
